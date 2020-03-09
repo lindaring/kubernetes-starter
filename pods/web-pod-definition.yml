@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lin-developer-tools-web-pod
+  labels:
+    app: lin-developer-tools
+    type: web-pod
+spec:
+  containers:
+    - name: lin-developer-tools-web-container
+      image: lindaring/lin-developer-tools-web:1.0.0-SNAPSHOT

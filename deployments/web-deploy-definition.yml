@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lin-developer-tools-web-deployment
+  labels:
+    app: lin-developer-tools
+    type: front-end
+spec:
+  template:
+    metadata:
+      name: lin-developer-tools-web-pod
+      labels:
+        app: lin-developer-tools
+        type: web-pod
+    spec:
+      containers:
+        - name: lin-developer-tools-web-container
+          image: lindaring/lin-developer-tools-web:1.0.0-SNAPSHOT
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lin-developer-tools
+      type: web-pod
