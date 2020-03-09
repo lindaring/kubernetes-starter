@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lin-developer-tools-database-deployment
+  labels:
+    app: lin-developer-tools
+    type: database-deployment
+spec:
+  template:
+    metadata:
+      name: lin-developer-tools-database-pod
+      labels:
+        app: lin-developer-tools
+        type: database-pod
+    spec:
+      containers:
+        - image: mysql:8.0.19
+          name: lin-developer-tools-database
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: E5a50PD%%*^vARQNUfzZ8hhmi
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          hostPath:
+            path: /var/lib/mysql
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: lin-developer-tools
+      type: database-pod
